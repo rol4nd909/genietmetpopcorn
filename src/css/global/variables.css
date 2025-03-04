@@ -1,0 +1,54 @@
+:root {
+  --color-neutral-100: hsl(0 0% 99%);
+  --color-neutral-900: hsl(281 24% 33%);
+  --color-primary-400: hsl(358 84% 65%);
+
+  --text: light-dark(var(--color-neutral-900), var(--color-neutral-100));
+  --surface: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+
+  /* typography */
+  --ff-sans: 'Racing Sans One', sans-serif;
+
+  --fw-normal: 400;
+
+  @utopia typeScale({
+    minFontSize: 18,
+    maxFontSize: 20,
+    minTypeScale: 1.2,
+    maxTypeScale: 1.25,
+    positiveSteps: 5,
+    negativeSteps: 2,
+    prefix: "fs",
+    relativeTo: "container"
+  });
+
+  /* Easings */
+  --ease: cubic-bezier(0.25, 0, 0.3, 1);
+  --ease-out: cubic-bezier(0, 0, 0, 1);
+  --ease-elastic-1: cubic-bezier(0.5, 1.25, 0.75, 1.25);
+  --ease-elastic-2: cubic-bezier(0.5, 1.5, 0.75, 1.25);
+
+  /* main constrain */
+  --constrain-lg: 87rem;
+  --constrain-md: 69rem;
+  --constrain-sm: 57rem;
+  --constrain-xs: 51rem;
+
+  --gutter: 1.5rem;
+}
+
+/* 
+    iOS 17.5 needs this
+    light-dark() won't work with the color-mix()
+    for example: `color-mix(in hsl, var(--text), var(--surface) 90%);`
+    does not work with the above --text and --surface custom properties
+  */
+[color-scheme='light'] {
+  --text: var(--color-neutral-900);
+  --surface: var(--color-neutral-100);
+}
+
+[color-scheme='dark'] {
+  --text: var(--color-neutral-100);
+  --surface: var(--color-neutral-900);
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Geniet met Popcorn",
+  "short_name": "Popcorn",
+  "description": "Welkom bij Geniet met Popcorn, de ultieme bestemming bij sensatie!",
+  "id": "/",
+  "start_url": "/",
+  "protocol_handlers": [
+    {
+      "protocol": "web+app",
+      "url": "/%s"
+    }
+  ],
+  "icons": [
+    {
+      "purpose": "any",
+      "sizes": "any",
+      "src": "/favicon.svg",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1200X800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Geniet met Popcorn"
+    },
+    {
+      "src": "/screenshot-narrow.png",
+      "sizes": "800X1200",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Geniet met Popcorn"
+    }
+  ],
+  "theme_color": "#fef2df",
+  "background_color": "#f15c62",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay"]
+}

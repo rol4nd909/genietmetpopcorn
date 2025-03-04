@@ -1,0 +1,10 @@
+.flex {
+  display: flex;
+  align-items: center;
+  gap: utopia.clamp(16, 24);
+}
+
+.inline-wrap {
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,130 @@
+---
+import { SITE } from '@/data/siteData'
+import { SEO } from 'astro-seo'
+
+import AstroFont from 'astro-font/AstroFont'
+import defaultImageFile from '/public/default-og-image.png'
+
+const {
+    title = SITE.title,
+    description = SITE.description,
+
+    canonical,
+    noindex = false,
+    nofollow = false,
+
+    ogTitle = title,
+    ogType = 'website',
+} = Astro.props
+
+const siteBaseURL = new URL(Astro.url)
+const defaultImage = new URL(defaultImageFile.src, siteBaseURL)
+
+let { image: _image } = Astro.props
+_image = _image || defaultImage
+
+let image = null
+if (typeof _image === 'string') {
+    image = new URL(_image, siteBaseURL)
+} else if (_image && typeof _image['href'] !== 'undefined') {
+    image = new URL(_image['href'], siteBaseURL)
+} else {
+    image = defaultImage
+}
+---
+
+<head>
+    <SEO
+        {title}
+        {description}
+        {canonical}
+        {noindex}
+        {nofollow}
+        charset="UTF-8"
+        openGraph={{
+            basic: {
+                url: canonical,
+                title: ogTitle,
+                type: ogType,
+                image: _image?.src ? _image.src : defaultImage.toString(),
+            },
+            image: {
+                url: image.toString(),
+                secureUrl: image.toString(),
+                alt: ogTitle,
+                height: _image?.height,
+                width: _image?.width,
+                type: _image?.format && `image/${_image.format}`,
+            },
+        }}
+        twitter={{
+            creator: '@_enjoy_popcorn',
+            image: image ? image.toString() : undefined,
+            imageAlt: ogTitle,
+            title: ogTitle,
+            site: '@_enjoy_popcorn',
+            description: description,
+            card: image ? 'summary_large_image' : 'summary',
+        }}
+        extend={{
+            meta: [
+                {
+                    name: 'generator',
+                    content: Astro.generator,
+                },
+                {
+                    name: 'viewport',
+                    content: 'width=device-width',
+                },
+                {
+                    name: 'apple-mobile-web-app-title',
+                    content: 'Popcorn',
+                },
+                {
+                    name: 'og:locale',
+                    content: 'nl_NL',
+                },
+                {
+                    name: 'og:description',
+                    content: description,
+                },
+                {
+                    name: 'og:site_name',
+                    content: SITE.title,
+                },
+            ],
+            link: [
+                {
+                    rel: 'icon',
+                    href: '/favicon-96x96.png',
+                    type: 'image/png',
+                    sizes: '96x96',
+                },
+                { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+                { rel: 'shortcut icon', href: '/favicon.ico' },
+                {
+                    rel: 'apple-touch-icon',
+                    href: '/apple-touch-icon.png',
+                    sizes: '180x180',
+                },
+                { rel: 'manifest', href: '/site.webmanifest' },
+            ],
+        }}
+    />
+
+    <AstroFont
+        config={[
+            {
+                src: [],
+                name: 'Racing Sans One',
+                // Google Fonts URL
+                googleFontsURL:
+                    'https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap',
+                preload: true,
+                display: 'swap',
+                selector: 'body',
+                fallback: 'sans-serif',
+            },
+        ]}
+    />
+</head>

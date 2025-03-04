@@ -1,0 +1,45 @@
+html {
+  @media (--motion-ok) {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-0);
+  line-height: 1.5;
+  color: var(--text);
+  background-color: var(--surface);
+
+  /* Stylistic Sets for & and R */
+  font-feature-settings:
+    'ss11' on,
+    'ss05' on;
+
+  scrollbar-gutter: stable;
+}
+
+main {
+  display: grid;
+  place-items: center;
+  min-block-size: 100vh;
+
+  & > * {
+    grid-area: 1 / 1;
+  }
+}
+
+:is(:focus-visible) {
+  outline-color: var(--color-primary-400);
+  outline-offset: 0.25rem;
+  outline-style: solid;
+  outline-width: 0.25rem;
+}
+
+@layer --containers {
+  cq-document-vi {
+    container-name: cq-document-vi;
+    container-type: inline-size;
+  }
+}
